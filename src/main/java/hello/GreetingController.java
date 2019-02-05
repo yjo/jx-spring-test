@@ -11,6 +11,11 @@ public class GreetingController {
     private static final String template = "Hello there, %s!";
     private final AtomicLong counter = new AtomicLong();
 
+    @RequestMapping("/")
+    void handleFoo(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/greeting");
+    }
+
     @RequestMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         return new Greeting(counter.incrementAndGet(),
